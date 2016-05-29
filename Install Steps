@@ -37,7 +37,7 @@ Deploy target node VM on W2012R2
 (On the Node) Copy the clientconfig.mof from the server to "$env:SystemDrive\Program Files\WindowsPowershell\DscService\Configuration" on the node
 (On the DSC Server) create the LCMConfig.ps1 script
 (On the DSC Server) configure the LCMConfig script to look for ClientConfig.mof
-(On the DSC Server) configure the certificate id to match the certificate thumbnail
+(On the DSC Server) configure the certificate id to match the certificate thumbprint
 (On the DSC Server) configure the registrationkey to match the registrationkey created on the pull server (C:\program files\windowspowershell\dscservice\registrationkeys.txt)
 (On the DSC Server) run the LCMConfig script to create the localhost.meta.mof file
 (On the Node) Copy the localhost.meta.mof from the server to C:\Configs\LCMConfig on the node
