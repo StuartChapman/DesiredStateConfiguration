@@ -4,20 +4,8 @@ Deploy a W2012R2 VM to be the DSC Server
 (On the DSC Server) Install-Module -Name xPSDesiredStateConfiguration
 (On the DSC Server) Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 (On the DSC Server) Install-Module -Name xDSCResourceDesigner
-(On the DSC Server) Install-Module -Name xPSCDesiredStateConfiguration
-(On the DSC Server) Install-Module -Name xNetworking
-(On the DSC Server) Install-Module -Name PSWindowsUpdate
-(On the DSC Server) Install-Module -Name xActiveDirectory
-(On the DSC Server) Install-Module -Name xWindowsUpdate
-(On the DSC Server) Install-Module -Name xSmbShare
-(On the DSC Server) Install-Module -Name xTimeZone
-(On the DSC Server) Install-Module -Name xSystemSecurity
-(On the DSC Server) Install-Module -Name xRemoteDesktopAdmin
-(On the DSC Server) Install-Module -Name xCertificate
-(On the DSC Server) Install-Module -Name xPowerShellExecutionPolicy
-(On the DSC Server) Install-Module -Name xDscDiagnostics
-(On the DSC Server) Install-Module -Name NuGet
-(On the DSC Server) Install-Module -Name cComputerManagement
+(On the DSC Server) Install-Module <others>
+(On the DSC Server) Install Notepad++, VMware Power CLI, Chrome
 (On the DSC Server) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 (On the DSC Server) Winrm quickconfig
 (On the DSC Server) Set-ExecutionPolicy "Unrestricted"
