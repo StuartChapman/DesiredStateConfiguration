@@ -1,0 +1,44 @@
+Deploy a W2012R2 VM to be the DSC Server
+(On the DSC Server) Install WMF5
+(On the DSC Server) Install-WindowsFeature DSC-Service -IncludeManagementTools
+(On the DSC Server) Install-Module -Name xPSDesiredStateConfiguration
+(On the DSC Server) Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+(On the DSC Server) Install-Module -Name xDSCResourceDesigner
+(On the DSC Server) Install-Module -Name xPSCDesiredStateConfiguration
+(On the DSC Server) Install-Module -Name xNetworking
+(On the DSC Server) Install-Module -Name PSWindowsUpdate
+(On the DSC Server) Install-Module -Name xActiveDirectory
+(On the DSC Server) Install-Module -Name xWindowsUpdate
+(On the DSC Server) Install-Module -Name xSmbShare
+(On the DSC Server) Install-Module -Name xTimeZone
+(On the DSC Server) Install-Module -Name xSystemSecurity
+(On the DSC Server) Install-Module -Name xRemoteDesktopAdmin
+(On the DSC Server) Install-Module -Name xCertificate
+(On the DSC Server) Install-Module -Name xPowerShellExecutionPolicy
+(On the DSC Server) Install-Module -Name xDscDiagnostics
+(On the DSC Server) Install-Module -Name NuGet
+(On the DSC Server) Install-Module -Name cComputerManagement
+(On the DSC Server) Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+(On the DSC Server) Winrm quickconfig
+(On the DSC Server) Set-ExecutionPolicy "Unrestricted"
+(On the DSC Server) New-EventLog –LogName Application –Source “DSC Scripts”
+(On the DSC Server) Download New-SelfSignedCertificateEX.PS1
+(On the DSC Server) Run the Create-DSC Certificate script to create the self-signed certificate on the Pull Server
+(On the DSC Server) Create files for both the Public & Private keys
+(On the DSC Server) Copy Thumbprint from the certificate into the script to create/configure the Pull Server
+(On the DSC Server) Run the script to configure the Pull Server
+Deploy target node VM on W2012R2
+(On the Node) Install WMF5
+(On the Node) Copy the PrivateKey.pfx from the server to the $env:temp folder on the node
+(On the Node) Import the private to localmachine\trustedroot; Write to event log cert was installed correctly
+(On the DSC Server) Create the Node configuration script - ClientConfig.ps1, configure the script to the publickey.cer file on the server, and specify the thumbprint.
+(On the DSC Server) Run the ClientConfig.ps1 script to create the localhost.mof file
+(On the DSC Server) Rename the localhost.mof file to clientconfig.mof
+(On the Node) Copy the clientconfig.mof from the server to "$env:SystemDrive\Program Files\WindowsPowershell\DscService\Configuration" on the node
+(On the DSC Server) create the LCMConfig.ps1 script
+(On the DSC Server) configure the LCMConfig script to look for ClientConfig.mof
+(On the DSC Server) configure the certificate id to match the certificate thumbnail
+(On the DSC Server) configure the registrationkey to match the registrationkey created on the pull server (C:\program files\windowspowershell\dscservice\registrationkeys.txt)
+(On the DSC Server) run the LCMConfig script to create the localhost.meta.mof file
+(On the Node) Copy the localhost.meta.mof from the server to C:\Configs\LCMConfig on the node
+(On the Node) Set-DSCLocalConfigurationManager localhost –Path C:\Configs\LCMConfig –Verbose
