@@ -30,7 +30,7 @@ Deploy a W2012R2 VM to be the DSC Server
 Deploy target node VM on W2012R2
 (On the Node) Install WMF5
 (On the Node) Copy the PrivateKey.pfx from the server to the $env:temp folder on the node
-(On the Node) Import the private to localmachine\trustedroot; Write to event log cert was installed correctly
+(On the Node) Import the private key to localmachine\trustedroot; Write to event log cert was installed correctly
 (On the DSC Server) Create the Node configuration script - ClientConfig.ps1, configure the script to the publickey.cer file on the server, and specify the thumbprint.
 (On the DSC Server) Run the ClientConfig.ps1 script to create the localhost.mof file
 (On the DSC Server) Rename the localhost.mof file to clientconfig.mof
