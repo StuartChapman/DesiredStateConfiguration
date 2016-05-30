@@ -15,6 +15,7 @@ Deploy a W2012R2 VM to be the DSC Server
 (On the DSC Server) Create files for both the Public & Private keys
 (On the DSC Server) Copy Thumbprint from the certificate into the script to create/configure the Pull Server
 (On the DSC Server) Run the script to configure the Pull Server
+(On the DSC Server) Create a Self-signed certificate in IIS (FQDN); Bind it to the website
 Deploy target node VM on W2012R2
 (On the Node) Install WMF5
 (On the Node) Copy the PrivateKey.pfx from the server to the $env:temp folder on the node
