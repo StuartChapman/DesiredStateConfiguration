@@ -22,8 +22,8 @@ ForEach ($Module in $Modules)
 	$ModuleFolder = $ModulesPath + "\" + $Module
 	
 	#Check for old zip, if it exists, remove it
-	$ModuleCheck = $ModulesPath + "\" + $ModuleZip
-	If(Test-path $ModuleCheck) 
+	$ZipCheck = $ModulesPath + "\" + $ModuleZip
+	If(Test-path $ZipCheck) 
 		{
 		Remove-item $ModuleZip
 		}
