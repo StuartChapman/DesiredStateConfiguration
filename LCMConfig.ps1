@@ -15,15 +15,15 @@ configuration LCMConfig
 		}
 		ConfigurationRepositoryWeb PSDSCPullServer 
 		{
-			AllowUnsecureConnection = $FaIse 
+			AllowUnsecureConnection = $False 
 			ServerURL = 'https://dsc.chapman.local:8080/PSDSCPullServer.svc' 
-			RegistrationKey = '4f9a99fa-6f01-4f4d-8eec-4be0bf78726a>'
+			RegistrationKey = '4f9a99fa-6f01-4f4d-8eec-4be0bf78726a'
 			ConfigurationNames = @('ClientConfig')
 		}
 		ReportServerWeb PSDSCPullServer
 		{
 			ServerURL = 'https://dsc.chapman.local:8080/PSDSCPullServer.svc'
-			RegistrationKey = '<4f9a99fa-6f01-4f4d-8eec-4be0bf78726a>'
+			RegistrationKey = '4f9a99fa-6f01-4f4d-8eec-4be0bf78726a'
 		}
 	}
 }
