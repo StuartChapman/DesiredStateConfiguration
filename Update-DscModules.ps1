@@ -1,4 +1,4 @@
-#Dynamically Create Zip files for DSC Modules & Create checksum of the zips on the DSC Pull Server
+#Dynamically Create Zip files for DSC Modules & Create checksum of the zips
 
 #Set Modules Location
 $ModulesPath = "C:\Program Files\WindowsPowerShell\Modules"
@@ -11,31 +11,31 @@ $Modules = Get-Childitem $ModulesPath
 
 ForEach ($Module in $Modules)
 	{
+	#Interim step while line-by-line testing
+    #$Module = $Modules[0]
+	
 	#Get Module version number
 	$ModuleVersionNumber = Get-Childitem $ModulesPath\$Module
-	$ModuleVersionNumber.Name #Is the version number
 	
 	#Create Module Zip name based upon format Module_VersionNumber.zip
-	$ModuleZip = $module + "_" + $ModuleVersionNumber + ".zip" 
+	$ModuleZip = $module.Name + "_" + $ModuleVersionNumber.Name + ".zip" 
 	
 	#Set the source folder to a variable
-	$ModuleFolder = $ModulesPath + "\" + $Module
+	$ModuleFolder = $ModulesPath + "\" + $Module + "\" + $ModuleVersionNumber.Name
 	
 	#Check for old zip, if it exists, remove it
-	$ZipCheck = $ModulesPath + "\" + $ModuleZip
-	If(Test-path $ZipCheck) 
+	$ModuleCheck = $ModulesPath + "\" + $ModuleZip
+	If(Test-path $ModuleCheck) 
 		{
-		Remove-item $ModuleZip
+		Remove-item $ModuleZip -ErrorAction SilentlyContinue
 		}
 	Else
 		{
 		#No zip to delete
 		}
 	
-	#Create the zip for the Module
-	Add-Type -assembly "system.io.compression.filesystem"
-	$PathToZip = $ModulesPath + "\" + $ModuleZip
-	[io.compression.zipfile]::CreateFromDirectory($ModuleFolder, $PathToZip)
+	#Create the zip for the Module, stored in C:\Program Files\WindowsPowerShell\Modules
+	Compress-Archive -Path $ModuleFolder\* -DestinationPath $ModulesPath\$ModuleZip
 	}
 
 #Delete the contents of the DSC Module Store (This will be zips & mofs)
@@ -46,4 +46,3 @@ mv $ModulesPath\*.zip $DscModuleStore
 
 #Create Checksums for all of the zip files in the DSC Module Store
 new-dscchecksum $DscModuleStore
-
