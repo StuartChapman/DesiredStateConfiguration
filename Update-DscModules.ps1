@@ -11,9 +11,6 @@ $Modules = Get-Childitem $ModulesPath
 
 ForEach ($Module in $Modules)
 	{
-	#Interim step while line-by-line testing
-    #$Module = $Modules[0]
-	
 	#Get Module version number
 	$ModuleVersionNumber = Get-Childitem $ModulesPath\$Module
 	
